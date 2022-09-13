@@ -13,7 +13,9 @@ const planets = [
 
 const removeOverflow = () => {
   let body = document.querySelector('body')
+  let mobileContainer = document.querySelector('.mobile-container')
   body.style.overflow = 'inherit';
+  mobileContainer.style.display = 'none';
 }
 
 function MobilePlanets() {

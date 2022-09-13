@@ -5,6 +5,7 @@ import MobilePlanets from './MobilePlanets';
 
 const Header = () => { //destructuring props
   let body = document.querySelector('body')
+  let mobileContainer = document.querySelector('.mobile-container')
   const [isShown, setIsShown] = useState(false);
   const handleClick = event => {
     setIsShown(current => !current);
@@ -13,6 +14,8 @@ const Header = () => { //destructuring props
     } else {
       body.style.overflow = 'inherit'
     }
+  mobileContainer.style.display = "flex";
+
   };
 
   return (
