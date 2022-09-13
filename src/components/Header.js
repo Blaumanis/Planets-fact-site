@@ -4,11 +4,15 @@ import Planets from './Planets'
 import MobilePlanets from './MobilePlanets';
 
 const Header = () => { //destructuring props
-  let mobileContainer = document.querySelector('.mobile-container')
+  let body = document.querySelector('body')
   const [isShown, setIsShown] = useState(false);
   const handleClick = event => {
     setIsShown(current => !current);
-    mobileContainer.classList.toggle('.body-overflow')
+    if(!isShown) {
+      body.style.overflow = 'hidden'
+    } else {
+      body.style.overflow = 'inherit'
+    }
   };
 
   return (
