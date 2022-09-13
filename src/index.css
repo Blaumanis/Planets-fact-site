@@ -368,6 +368,7 @@ p {
         position: absolute;
         bottom: 0;
     }
+
 }
 
 @media (max-width:767px) {
@@ -410,6 +411,9 @@ p {
     }
     .planet-name::before {
         display: none;
+    }
+    body {
+        overflow: inherit !important;
     }
 }
 
