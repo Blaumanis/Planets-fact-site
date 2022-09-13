@@ -1,13 +1,573 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* here we do the styling */
+
+:root {
+    --primary-color: #fff;
+    --primary-bg: #070724;
+    --secondary-color: #6d2ed5;
+    --mercury: #419EBB;
+    --venus: #eda249;
+    --earth: #6d2ed5;
+    --mars: #d14c32;
+    --jupiter: #d83a34;
+    --saturn: #cd5120;
+    --uranus: #1ec142;
+    --neptune: #2d68f0;
+    --grey: #ffffff4d;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    background-color: var(--primary-bg);
+    background-image: url('../public/images/background-stars.svg');
+    font-family: 'League Spartan', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Antonio', sans-serif;
+    color: var(--primary-color);
+}
+
+p {
+    color: var(--primary-color);
+}
+
+/* planet names in header */
+.planet-name {
+    position: relative;
+    cursor: pointer;
+}
+
+.main {
+    animation: fade 1s linear;
+}
+
+.planet-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    opacity: 0;
+    transition: all .5s linear;
+}
+
+.planet-name:hover::after {
+    opacity: 1;
+}
+
+.planet-name:first-child::after {
+    background-color: var(--mercury);
+}
+
+.planet-name:nth-child(2)::after {
+    background-color: var(--venus);
+}
+
+.planet-name:nth-child(3)::after {
+    background-color: var(--earth);
+}
+
+.planet-name:nth-child(4)::after {
+    background-color: var(--mars);
+}
+
+.planet-name:nth-child(5)::after {
+    background-color: var(--jupiter);
+}
+
+.planet-name:nth-child(6)::after {
+    background-color: var(--saturn);
+}
+
+.planet-name:nth-child(7)::after {
+    background-color: var(--uranus);
+}
+
+.planet-name:nth-child(8)::after {
+    background-color: var(--neptune);
+}
+
+/* info tab */
+.info-tab {
+    position: relative;
+}
+
+.info-tab::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--grey);
+    opacity: 0;
+    transition: all 0.5s linear;
+}
+
+.info-tab:hover::after {
+    opacity: 0.5;
+}
+
+.spec-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    width: 85%;
+    float: right;
+}
+
+.spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--grey);
+}
+
+.spec h3, .spec h4 {
+    opacity: 0.7;
+}
+
+.spec h4 {
+    font-size: 2rem;
+}
+
+.surface-img {
+    display: none;
+    position: absolute;
+    bottom: -10%;
+    right: 40%;
+    width: 125px;
+}
+
+.show {
+    display: block;
+}
+
+/* solar-system */
+.solar-system {
+    width: 100vw;
+    height: 590px;
+    position: relative;
+}
+
+.solar-system a {
+    background-color: transparent;
+    border-radius: 100%;
+    border: 1px solid var(--grey);
+    opacity: 0.5;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.solar-system a:hover{
+    opacity: 1;
+}
+
+.solar-system a::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    position: absolute;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.solar-system a:hover::after {
+    transform: scale(2);
+}
+
+/* neptune circle */
+.neptune-circle {
+    width: 600px;
+    height: 600px;
+    animation: orbit 140s linear infinite;
+}
+
+.neptune-circle::after {
+    background-image: url('../public/images/planet-neptune.svg');
+    top: 10%;
+    left: 14%;
+}
+
+.neptune-circle:hover {
+    border-color: var(--neptune);
+}
+
+/* uranus circle */
+.uranus-circle {
+    width: 530px;
+    height: 530px;
+    animation: orbit 120s linear infinite;
+}
+
+.uranus-circle::after {
+    background-image: url('../public/images/planet-uranus.svg');
+    top: -2%;
+    left: 38%;
+}
+
+.uranus-circle:hover {
+    border-color: var(--uranus);
+}
+
+/* saturn circle */
+.saturn-circle {
+    width: 460px;
+    height: 460px;
+    animation: orbit 100s linear infinite;
+}
+
+.saturn-circle::after {
+    background-image: url('../public/images/planet-saturn.svg');
+    top: 2%;
+    left: 68%;
+}
+
+.saturn-circle:hover {
+    border-color: var(--saturn);
+}
+
+/* jupiter circle */
+.jupiter-circle {
+    width: 390px;
+    height: 390px;
+    animation: orbit 80s linear infinite;
+}
+
+.jupiter-circle::after {
+    background-image: url('../public/images/planet-jupiter.svg');
+    top: 23%;
+    right: 3%;
+}
+
+.jupiter-circle:hover {
+    border-color: var(--jupiter);
+}
+
+/* marc circle */
+.mars-circle {
+    width: 290px;
+    height: 290px;
+    animation: orbit 40s linear infinite;
+}
+
+.mars-circle::after {
+    background-image: url('../public/images/planet-mars.svg');
+    top: 39%;
+    right: -3%;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+.mars-circle:hover {
+    border-color: var(--mars);
+}
+
+.earth-circle {
+    width: 240px;
+    height: 240px;
+    animation: orbit 30s linear infinite;
+}
+
+/* earth circle */
+.earth-circle:hover {
+    border-color: var(--earth);
+}
+
+.earth-circle::after {
+    background-image: url('../public/images/planet-earth.svg');
+    bottom: -4%;
+    right: 35%;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+/* venus circle */
+.venus-circle {
+    width: 190px;
+    height: 190px;
+    animation: orbit 20s linear infinite;
+}
+
+.venus-circle::after {
+    background-image: url('../public/images/planet-venus.svg');
+    bottom: 10%;
+    left: 5%;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.venus-circle:hover {
+    border-color: var(--venus);
+}
+
+/* mercury circle */
+.mercury-circle {
+    width: 140px;
+    height: 140px;
+    animation: orbit 10s linear infinite;
+}
+
+.mercury-circle::after {
+    background-image: url('../public/images/planet-mercury.svg');
+    top: 7%;
+    left: 12%;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.mercury-circle:hover {
+    border-color: var(--mercury);
+}
+
+/* sun circle */
+.sun {
+    width: 100px;
+    height: 100px;
+    background-image: url('https://planets-tediko.netlify.app/images/sun.png?4d9f62a1f20a3856249972a797eb9a7a');
+    background-size: cover;
+    border: none !important;
+    opacity: 1 !important;
+    box-shadow: 0px 0px 4px 1px #fabf3c;
+}
+
+@keyframes orbit {
+    0% {
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(-360deg);
+    }
+}
+
+@media (max-width: 767px) {
+    .info-tabs::after {
+        content: '';
+        width: 100vw;
+        height: 1px;
+        background-color: var(--grey);
+        opacity: .5;
+        position: absolute;
+    }
+    .info-tabs::before {
+        content: '';
+        width: 100vw;
+        height: 1px;
+        background-color: var(--grey);
+        opacity: .5;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media (max-width:767px) {
+    .planet-name:first-child::before {
+        background-color: var(--mercury);
+    }
+    
+    .planet-name:nth-child(2)::before {
+        background-color: var(--venus);
+    }
+    
+    .planet-name:nth-child(3)::before {
+        background-color: var(--earth);
+    }
+    
+    .planet-name:nth-child(4)::before {
+        background-color: var(--mars);
+    }
+    
+    .planet-name:nth-child(5)::before {
+        background-color: var(--jupiter);
+    }
+    
+    .planet-name:nth-child(6)::before {
+        background-color: var(--saturn);
+    }
+    
+    .planet-name:nth-child(7)::before {
+        background-color: var(--uranus);
+    }
+    
+    .planet-name:nth-child(8)::before {
+        background-color: var(--neptune);
+    }
+}
+
+@media (min-width: 767px) {
+    .mobile-container {
+        display: none;
+    }
+    .planet-name::before {
+        display: none;
+    }
+}
+
+.mobile-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-bg);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    animation: slide 1s linear;
+}
+
+.mobile-wrapper {
+    position: absolute;
+    left: 1rem;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.body-overflow {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.mobile-container .planet-name {
+    position: relative;
+    padding-left: 2rem;
+    width: 93vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-container .planet-name::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--grey);
+    opacity: 0.5;
+    bottom: -10px;
+    transition: all .5s linear;
+}
+
+.mobile-container .planet-name:hover::after {
+    opacity: 1;
+    animation: line .5s linear reverse;
+}
+
+.mobile-container .planet-name:hover svg path {
+    opacity: 1;
+}
+
+.mobile-container .planet-name:first-child:hover::after {
+    background-color: var(--mercury);
+}
+
+.mobile-container .planet-name:first-child:hover svg path {
+    stroke: var(--mercury);
+}
+
+.mobile-container .planet-name:nth-child(2):hover::after {
+    background-color: var(--venus);
+}
+
+.mobile-container .planet-name:nth-child(2):hover svg path {
+    stroke: var(--venus);
+}
+
+.mobile-container .planet-name:nth-child(3):hover::after {
+    background-color: var(--earth);
+}
+
+.mobile-container .planet-name:nth-child(3):hover svg path {
+    stroke: var(--earth);
+}
+
+.mobile-container .planet-name:nth-child(4):hover::after {
+    background-color: var(--mars);
+}
+
+.mobile-container .planet-name:nth-child(4):hover svg path {
+    stroke: var(--mars);
+}
+
+.mobile-container .planet-name:nth-child(5):hover::after {
+    background-color: var(--jupiter);
+}
+
+.mobile-container .planet-name:nth-child(5):hover svg path {
+    stroke: var(--jupiter);
+}
+
+.mobile-container .planet-name:nth-child(6):hover::after {
+    background-color: var(--saturn);
+}
+
+.mobile-container .planet-name:nth-child(6):hover svg path {
+    stroke: var(--saturn);
+}
+
+.mobile-container .planet-name:nth-child(7):hover::after {
+    background-color: var(--uranus);
+}
+
+.mobile-container .planet-name:nth-child(7):hover svg path {
+    stroke: var(--uranus);
+}
+
+.mobile-container .planet-name:nth-child(8):hover::after {
+    background-color: var(--neptune);
+}
+
+.mobile-container .planet-name:nth-child(8):hover svg path {
+    stroke: var(--neptune);
+}
+
+.planet-name::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: 4px;
+    left: 0;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes line {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
